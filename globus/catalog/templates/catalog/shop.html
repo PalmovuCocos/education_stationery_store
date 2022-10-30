@@ -1,0 +1,10 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+МЫ В КАТАЛОГЕ
+
+{% for m in items%}
+<h2>{{m.name}}</h2>
+<p>{{m.price}}</p>
+{% endfor %}
+{% endblock %}

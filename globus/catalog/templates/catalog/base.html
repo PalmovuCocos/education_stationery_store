@@ -1,0 +1,38 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" href="{% static 'catalog/css/style.css' %}" rel="stylesheet">
+    <title>{{title}}</title>
+</head>
+<body>
+<header>
+    <ul>
+        <li><a href="#"><img src="{% static 'catalog/images/pencil.png' %}" width="80px" height="80px"></a></li>
+        <li><a href="#"><h3>Каталог</h3></a></li>
+        <li><a href="#"><img src="{% static 'catalog/images/basket.png' %}" width="80px" height="80px"></a></li>
+        <li><a href="#"><img src="{% static 'catalog/images/user.png' %}" width="80px" height="80px"></a></li>
+    </ul>
+</header>
+{% block content %}
+{% endblock %}
+<footer>
+    <h3>Покупателям</h3>
+    <ul>
+        <li><a href="#">Доставка</a></li>
+        <li><a href="#">Возврат товара</a></li>
+        <li><a href="#">Вопросы и ответы</a></li>
+    </ul>
+    <h3>Компания</h3>
+    <ul>
+        <li><a href="#">О нас</a></li>
+        <li><a href="#">Реквизиты</a></li>
+        <li><a href="#">Контакты</a></li>
+    </ul>
+    <h3>Мы в социальных сетях</h3>
+    <ul><img src=""></ul>
+    <ul><img src=""></ul>
+</footer>
+</body>
+</html>
