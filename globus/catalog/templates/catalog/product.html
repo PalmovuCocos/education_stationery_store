@@ -1,0 +1,14 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+
+<h2>{{product.name}}</h2>
+<p>{{product.category}}</p>
+<p>{{product.price}}</p>
+<p>{{product.brand}}</p>
+<p>{{product.photo}}</p>
+<a href="#">В корзину</a>
+{% if m.quantity_in_stock == 0 %}
+нет в наличии
+{% endif %}
+{% endblock %}

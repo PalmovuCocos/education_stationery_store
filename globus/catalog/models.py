@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 class Product(models.Model):
@@ -9,6 +10,9 @@ class Product(models.Model):
     photo = models.ImageField(upload_to="photos/%Y/%m/%d/", verbose_name='Фото')
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена')
     quantity_in_stock = models.PositiveIntegerField(verbose_name='Количество на складе')
+
+    def get_absolute_url(self):
+        return reverse('show_product', kwargs={'product_id': self.pk})
 
     def __str__(self):
         return self.name

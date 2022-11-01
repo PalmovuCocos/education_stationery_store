@@ -26,5 +26,16 @@ def basket(request):
     return render(request, 'catalog/basket.html', context=context)
 
 
+def show_product(request, product_id):
+    product = Product.objects.filter(id=product_id)
+    if len(product) == 0:
+        raise Http404()
+    context = {
+        'title': product.name,
+        'product': product
+    }
+    return render(request, 'catalog/product.html', context=context)
+
+
 def pageNotFound(request, exception):
     return HttpResponseNotFound('<h1>Страница не найдена</h1>')

@@ -1,10 +1,16 @@
 {% extends 'catalog/base.html' %}
 
 {% block content %}
-МЫ В КАТАЛОГЕ
 
 {% for m in items%}
 <h2>{{m.name}}</h2>
+<p>{{m.category}}</p>
 <p>{{m.price}}</p>
+<p>{{m.brand}}</p>
+<p>{{m.photo}}</p>
+<a href="{{m.get_absolute_url}}">Открыть товар</a>
+{% if m.quantity_in_stock == 0 %}
+нет в наличии
+{% endif %}
 {% endfor %}
 {% endblock %}
