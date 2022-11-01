@@ -20,7 +20,10 @@ def shop(request):
 
 
 def basket(request):
-    pass
+    context = {
+        'title': 'Корзина',
+    }
+    return render(request, 'catalog/basket.html', context=context)
 
 
 def pageNotFound(request, exception):

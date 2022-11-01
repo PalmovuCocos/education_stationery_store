@@ -1,38 +1,45 @@
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <link type="text/css" href="{% static 'catalog/css/style.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'catalog/css/styles.css' %}" rel="stylesheet">
     <title>{{title}}</title>
 </head>
 <body>
 <header>
-    <ul>
-        <li><a href="#"><img src="{% static 'catalog/images/pencil.png' %}" width="80px" height="80px"></a></li>
-        <li><a href="#"><h3>Каталог</h3></a></li>
-        <li><a href="#"><img src="{% static 'catalog/images/basket.png' %}" width="80px" height="80px"></a></li>
-        <li><a href="#"><img src="{% static 'catalog/images/user.png' %}" width="80px" height="80px"></a></li>
+    <ul class="menu">
+        <div class="menu_left">
+        <li><a href="{% url 'home' %}"><img class="icon" src="{% static 'catalog/images/pencil.png' %}" ></a></li>
+        <li><a href="{% url 'shop' %}"><h2>Каталог</h2></a></li></div>
+        <div class="menu_right">
+        <li><a href="{% url 'basket' %}"><img src="{% static 'catalog/images/basket.png' %}"></a></li>
+        <li><a href="#"><img src="{% static 'catalog/images/user.png' %}"></a></li></div>
     </ul>
 </header>
 {% block content %}
 {% endblock %}
-<footer>
+<footer class="">
+    <div>
     <h3>Покупателям</h3>
     <ul>
         <li><a href="#">Доставка</a></li>
         <li><a href="#">Возврат товара</a></li>
         <li><a href="#">Вопросы и ответы</a></li>
-    </ul>
+    </ul></div>
+    <div>
     <h3>Компания</h3>
     <ul>
         <li><a href="#">О нас</a></li>
         <li><a href="#">Реквизиты</a></li>
         <li><a href="#">Контакты</a></li>
-    </ul>
+    </ul></div>
+    <div>
     <h3>Мы в социальных сетях</h3>
-    <ul><img src=""></ul>
-    <ul><img src=""></ul>
+        <ul class="menu">
+    <li><a href="#"><img src="{% static 'catalog/images/vk.png' %}" width="40px" height="40px"></a></li>
+    <li><a href="#"><img src="{% static 'catalog/images/tg.png' %}" width="40px" height="40px"></a></li>
+        </ul></div>
 </footer>
 </body>
 </html>
