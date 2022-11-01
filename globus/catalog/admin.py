@@ -10,8 +10,23 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('brand',)    # атрибуты по которым можно проводить фильтрацию
 
 
+class BasketAdmin(admin.ModelAdmin):
+    list_display = ('id', 'product', 'user', 'amount')
+    list_display_links = ('id',)
+    search_fields = ('product', 'user')
+    list_filter = ('product', 'user')
+
+
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('id', 'basket', 'total_cost', 'status')
+    list_display_links = ('id',)
+    search_fields = ('basket', 'status')
+    list_editable = ('status',)
+    list_filter = ('basket', 'status')
+
+
 admin.site.register(Product, ProductAdmin)
-admin.site.register(Basket)
-admin.site.register(Order)
+admin.site.register(Basket, BasketAdmin)
+admin.site.register(Order, OrderAdmin)
 
 
