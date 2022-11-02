@@ -6,9 +6,16 @@
 <p>{{product.category}}</p>
 <p>{{product.price}}</p>
 <p>{{product.brand}}</p>
+<p>Доступно к продаже: {{product.quantity_in_stock}}</p>
 <img src="{{product.photo.url}}" width="40px" height="40px">
-<a href="#">В корзину</a>
-{% if m.quantity_in_stock == 0 %}
+<form action="#" method="POST">
+    {% csrf_token %}
+    <p>{{ form.non_field_errors }}</p>
+    <p>{{form.amount.label}}{{form.amount}}</p>
+    <p>{{form.errors}}</p>
+    <button type="submit">В корзину</button>
+</form>
+{% if product.quantity_in_stock == 0 %}
 нет в наличии
 {% endif %}
 {% endblock %}

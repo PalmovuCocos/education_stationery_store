@@ -1,6 +1,8 @@
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product
+
+from .forms import AddBasketFrom
+from .models import *
 
 
 def index(request):    # httpRequest
@@ -28,9 +30,22 @@ def basket(request):
 
 def show_product(request, product_id):
     product = get_object_or_404(Product, id=product_id)
+    if request.method == "POST":
+        form = AddBasketFrom(request.POST)
+        if form.is_valid():
+            try:
+                Basket.objects.create(product_id=product.pk,
+                                      user_id=1,
+                                      amount=form.cleaned_data['amount'])
+                return redirect('shop')
+            except:
+                form.add_error(None, "Ошибка добавления продукта")
+    else:
+        form = AddBasketFrom()
     context = {
         'title': product.name,
-        'product': product
+        'product': product,
+        'form': form,
     }
     return render(request, 'catalog/product.html', context=context)
 
