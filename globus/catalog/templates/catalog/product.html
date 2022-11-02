@@ -6,7 +6,7 @@
 <p>{{product.category}}</p>
 <p>{{product.price}}</p>
 <p>{{product.brand}}</p>
-<p>{{product.photo}}</p>
+<img src="{{product.photo.url}}" width="40px" height="40px">
 <a href="#">В корзину</a>
 {% if m.quantity_in_stock == 0 %}
 нет в наличии

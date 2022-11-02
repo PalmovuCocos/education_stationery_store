@@ -7,7 +7,7 @@
 <p>{{m.category}}</p>
 <p>{{m.price}}</p>
 <p>{{m.brand}}</p>
-<p>{{m.photo}}</p>
+<img src="{{m.photo.url}}" width="40px" height="40px">
 <a href="{{m.get_absolute_url}}">Открыть товар</a>
 {% if m.quantity_in_stock == 0 %}
 нет в наличии

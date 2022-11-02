@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseNotFound, Http404
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product
 
 
@@ -27,9 +27,7 @@ def basket(request):
 
 
 def show_product(request, product_id):
-    product = Product.objects.filter(id=product_id)
-    if len(product) == 0:
-        raise Http404()
+    product = get_object_or_404(Product, id=product_id)
     context = {
         'title': product.name,
         'product': product
