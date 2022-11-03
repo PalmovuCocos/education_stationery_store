@@ -8,7 +8,7 @@
 <p>{{product.brand}}</p>
 <p>Доступно к продаже: {{product.quantity_in_stock}}</p>
 <img src="{{product.photo.url}}" width="40px" height="40px">
-<form action="#" method="POST">
+<form action="#" method="POST" >
     {% csrf_token %}
     <p>{{ form.non_field_errors }}</p>
     <p>{{form.amount.label}}{{form.amount}}</p>
