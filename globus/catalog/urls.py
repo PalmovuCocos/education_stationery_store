@@ -6,6 +6,7 @@ urlpatterns = [
     path('shop/', Shop.as_view(), name="shop"),
     path('basket/', basket, name="basket"),
     path('shop/product/<int:product_id>/', show_product, name='show_product'),
-    path('authorization', authorization, name='authorization'),
+    path('authorization', LoginUser.as_view(), name='authorization'),
+    path('logout', logout_user, name='logout'),
     path('register', RegisterUser.as_view(), name='register'),
 ]

@@ -13,7 +13,11 @@
     <p>{{ form.non_field_errors }}</p>
     <p>{{form.amount.label}}{{form.amount}}</p>
     <p>{{form.errors}}</p>
+            {% if request.user.is_authenticated %}
     <button type="submit">В корзину</button>
+    {% else %}
+    <p>необходима авторизация</p>
+            {% endif %}
 </form>
 {% if product.quantity_in_stock == 0 %}
 нет в наличии

@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'catalog/base.html' %}
 
-</body>
-</html>
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{form.non_field_errors}}
+    {% for f in form %}
+   <p> {{f.label}}{{f}}</p>
+    {{f.errors}}
+    {% endfor %}
+    <button type="submit">Вход</button>
+</form>
+{% endblock %}

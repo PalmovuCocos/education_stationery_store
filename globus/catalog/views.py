@@ -1,10 +1,13 @@
+from django.contrib.auth import logout, login
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import LoginView
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, CreateView
 
-from .forms import AddBasketFrom, RegisterUserForm
+from .forms import AddBasketFrom, RegisterUserForm, LoginUserForm
 from .models import *
 
 
@@ -44,7 +47,7 @@ def show_product(request, product_id):
         if form.is_valid():    # проверка на правильность введенных данных
             try:
                 Basket.objects.create(product_id=product.pk,
-                                      user_id=1,
+                                      user_id=request.user.pk,
                                       amount=form.cleaned_data['amount'])    # запос на добавление корзины
                 return redirect('shop')    # редирект на страницу с списком товара
             except:
@@ -73,6 +76,26 @@ class RegisterUser(CreateView):
         context['title'] = 'Регистрация'
         return context
 
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('home')
 
-def authorization(request):
-    return HttpResponseNotFound('Авторизация')
+
+class LoginUser(LoginView):
+    form_class = LoginUserForm
+    template_name = 'catalog/authorization.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Авторизация'
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy('home')
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('home')
+
