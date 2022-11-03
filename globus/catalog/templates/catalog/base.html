@@ -15,7 +15,9 @@
         <li><a href="{% url 'shop' %}"><h2>Каталог</h2></a></li></div>
         <div class="menu_right">
         <li><a href="{% url 'basket' %}"><img src="{% static 'catalog/images/basket.png' %}"></a></li>
-        <li><a href="#"><img src="{% static 'catalog/images/user.png' %}"></a></li></div>
+        <li><a href="#"><img src="{% static 'catalog/images/user.png' %}"></a></li>
+                    <li><a href="{% url 'register' %}">register</a></li>
+            <li><a href="{% url 'authorization' %}">authorization</a></li></div>
     </ul>
 </header>
 {% block content %}

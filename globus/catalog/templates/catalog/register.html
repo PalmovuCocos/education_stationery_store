@@ -1,0 +1,12 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {% for f in form %}
+   <p> {{f.label}}{{f}}</p>
+    {{f.errors}}
+    {% endfor %}
+    <button type="submit">Регистрация</button>
+</form>
+{% endblock %}

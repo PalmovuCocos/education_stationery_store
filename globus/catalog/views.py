@@ -1,9 +1,10 @@
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 
-from .forms import AddBasketFrom
+from .forms import AddBasketFrom, RegisterUserForm
 from .models import *
 
 
@@ -60,3 +61,18 @@ def show_product(request, product_id):
 
 def pageNotFound(request, exception):
     return HttpResponseNotFound('<h1>Страница не найдена</h1>')
+
+
+class RegisterUser(CreateView):
+    form_class = RegisterUserForm
+    template_name = 'catalog/register.html'
+    success_url = reverse_lazy('home')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Регистрация'
+        return context
+
+
+def authorization(request):
+    return HttpResponseNotFound('Авторизация')
