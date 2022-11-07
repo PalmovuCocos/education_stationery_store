@@ -15,11 +15,11 @@
         <li><a href="{% url 'shop' %}"><h2>Каталог</h2></a></li></div>
         <div class="menu_right">
         <li><a href="{% url 'basket' %}"><img src="{% static 'catalog/images/basket.png' %}"></a></li>
-        <li><a href="#"><img src="{% static 'catalog/images/user.png' %}"></a></li>
+     <!--   <li><a href="#"><img src="{% static 'catalog/images/user.png' %}"></a></li>  -->
         {% if request.user.is_authenticated %}
             <li>{{user.username}} | <a href="{% url 'logout' %}">Выйти</a></li>
         {% else %}
-            <li><a href="{% url 'register' %}">register</a></li>
+            <li><a href="{% url 'register' %}">register </a></li>
             <li><a href="{% url 'authorization' %}">authorization</a></li></div>
         {% endif %}
     </ul>

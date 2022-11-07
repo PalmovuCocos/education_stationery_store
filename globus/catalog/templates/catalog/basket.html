@@ -2,6 +2,15 @@
 
 {% block content %}
 
-<h1>Мы в корзине </h1>
+{% for i in basket %}
+<p>{{i.product.name}}</p>
+<p>{{i.product.category}}</p>
+<img src="{{i.product.photo.url}}" width="40px" height="40px">
+<p>{{i.product.brand}}</p>
+<p>{{i.product.price}}</p>
+<p>количество {{i.amount}}</p>
+
+<br>
+{% endfor %}
 
 {% endblock %}

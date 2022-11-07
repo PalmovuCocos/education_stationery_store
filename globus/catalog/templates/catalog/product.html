@@ -1,25 +1,25 @@
 {% extends 'catalog/base.html' %}
 
 {% block content %}
+    <h2>{{product.name}}</h2>
+    <p>{{product.category}}</p>
+    <p>{{product.price}}</p>
+    <p>{{product.brand}}</p>
+    <p>Доступно к продаже: {{product.quantity_in_stock}}</p>
+    <img src="{{product.photo.url}}" width="40px" height="40px">
+    <form action="#" method="POST" >
+        {% csrf_token %}
+        <p>{{ form.non_field_errors }}</p>
+        <p>{{form.amount.label}}{{form.amount}}</p>
+        <p>{{form.errors}}</p>
+                {% if request.user.is_authenticated %}
+        <button type="submit">В корзину</button>
+        {% else %}
+        <p>необходима авторизация</p>
+                {% endif %}
+    </form>
+    {% if product.quantity_in_stock == 0 %}
+    нет в наличии
+    {% endif %}
 
-<h2>{{product.name}}</h2>
-<p>{{product.category}}</p>
-<p>{{product.price}}</p>
-<p>{{product.brand}}</p>
-<p>Доступно к продаже: {{product.quantity_in_stock}}</p>
-<img src="{{product.photo.url}}" width="40px" height="40px">
-<form action="#" method="POST" >
-    {% csrf_token %}
-    <p>{{ form.non_field_errors }}</p>
-    <p>{{form.amount.label}}{{form.amount}}</p>
-    <p>{{form.errors}}</p>
-            {% if request.user.is_authenticated %}
-    <button type="submit">В корзину</button>
-    {% else %}
-    <p>необходима авторизация</p>
-            {% endif %}
-</form>
-{% if product.quantity_in_stock == 0 %}
-нет в наличии
-{% endif %}
 {% endblock %}

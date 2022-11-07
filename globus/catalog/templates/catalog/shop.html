@@ -1,16 +1,20 @@
 {% extends 'catalog/base.html' %}
 
 {% block content %}
-
+<ul class="products">
 {% for m in items%}
-<h2>{{m.name}}</h2>
-<p>{{m.category}}</p>
-<p>{{m.price}}</p>
-<p>{{m.brand}}</p>
-<img src="{{m.photo.url}}" width="40px" height="40px">
-<a href="{{m.get_absolute_url}}">Открыть товар</a>
-{% if m.quantity_in_stock == 0 %}
-нет в наличии
-{% endif %}
+<li class="product-wrapper">
+    <a href="{{m.get_absolute_url}}" class="product">
+    <h2>{{m.name}}</h2>
+    <p>{{m.category}}</p>
+    <p>{{m.price}}</p>
+    <p>{{m.brand}}</p>
+    <img src="{{m.photo.url}}" width="40px" height="40px">
+    {% if m.quantity_in_stock == 0 %}
+    нет в наличии
+    {% endif %}
+    </a>
+</li>
 {% endfor %}
+</ul>
 {% endblock %}

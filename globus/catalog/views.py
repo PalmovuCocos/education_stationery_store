@@ -34,8 +34,12 @@ class Shop(ListView):
 
 
 def basket(request):
+    basket_data = Basket.objects.filter(user_id=request.user.pk)
+    product = []
     context = {
         'title': 'Корзина',
+        'basket': basket_data,
+        'product': product,
     }
     return render(request, 'catalog/basket.html', context=context)
 
