@@ -19,14 +19,15 @@
         {% if request.user.is_authenticated %}
             <li>{{user.username}} | <a href="{% url 'logout' %}">Выйти</a></li>
         {% else %}
-            <li><a href="{% url 'register' %}">register </a></li>
-            <li><a href="{% url 'authorization' %}">authorization</a></li></div>
+            <li><a href="{% url 'register' %}">Регистрация </a></li>
+            <li><a href="{% url 'authorization' %}">Авторизация </a></li></div>
         {% endif %}
     </ul>
 </header>
+
 {% block content %}
 {% endblock %}
-<footer class="">
+<footer>
     <div>
     <h3>Покупателям</h3>
     <ul>

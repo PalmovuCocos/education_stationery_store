@@ -1,6 +1,7 @@
 {% extends 'catalog/base.html' %}
 
 {% block content %}
+<div class="content">
     <h2>{{product.name}}</h2>
     <p>{{product.category}}</p>
     <p>{{product.price}}</p>
@@ -21,5 +22,5 @@
     {% if product.quantity_in_stock == 0 %}
     нет в наличии
     {% endif %}
-
+</div>
 {% endblock %}
