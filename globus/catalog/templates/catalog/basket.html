@@ -2,16 +2,23 @@
 
 {% block content %}
 <div class="content">
-{% for i in basket %}
+    {% for i in items %}
+    <table>
+        <tr>
+            <th>{{i.product.name}}</th>
+            <th>{{i.product.category}}</th>
+            <th><img src="{{i.product.photo.url}}" width="40px" height="40px"></th>
+            <th>{{i.product.brand}}</th>
+            <th>{{i.product.price}}</th>
+            <th>количество {{i.amount}}</th>
+        </tr>
+    </table>
+    <br>
+    {% endfor %}
+                <form action="#" method="POST" >
+                            {% csrf_token %}
+                 <button type="submit">Сделать заказ</button>
 
-<p>{{i.product.name}}</p>
-<p>{{i.product.category}}</p>
-<img src="{{i.product.photo.url}}" width="40px" height="40px">
-<p>{{i.product.brand}}</p>
-<p>{{i.product.price}}</p>
-<p>количество {{i.amount}}</p>
-
-<br>
-{% endfor %}
+            </form>
 </div>
 {% endblock %}

@@ -34,15 +34,42 @@ class Shop(ListView):
         return context
 
 
-def basket(request):
-    basket_data = Basket.objects.filter(user_id=request.user.pk)
-    product = []
-    context = {
-        'title': 'Корзина',
-        'basket': basket_data,
-        'product': product,
-    }
-    return render(request, 'catalog/basket.html', context=context)
+class BasketShow(View):
+    template_name = 'catalog/basket.html'
+
+    def get(self, request):
+        basket = Basket.objects.filter(user_id=request.user.pk)
+        context = {
+            'title': 'Корзина',
+            'items': basket,
+        }
+        return render(request, self.template_name, context=context)
+
+    def post(self, request):
+        basket = Basket.objects.filter(user_id=request.user.pk)
+        context = {
+            'title': 'Корзина',
+            'basket': basket,
+        }
+        total_cost = sum([i.product.price for i in basket])
+        for b in basket:
+            Order.objects.create(basket_id=b.pk,
+                                 total_cost=total_cost,
+                                 status='Обрабатывается')
+            print('YES')
+        return render(request, self.template_name, context=context)
+
+
+class OrderList(View):
+    template_name = 'catalog/Profile.html'
+
+    def get(self, request):
+        orders = Order.objects.filter(basket=request.user.pk)
+        context = {
+            'title': 'Провиль',
+            'items': orders,
+        }
+        return render(request, self.template_name, context=context)
 
 
 class Show_product(View):
@@ -112,8 +139,12 @@ def logout_user(request):
     logout(request)
     return redirect('home')
 
+
+
 # 25 минута
 class ProductAPIView (generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+
 
