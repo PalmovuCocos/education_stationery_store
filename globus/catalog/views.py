@@ -1,5 +1,4 @@
 from django.contrib.auth import logout, login
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render, redirect, get_object_or_404
@@ -7,7 +6,9 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, CreateView, TemplateView
 
-from rest_framework import generics
+from rest_framework import generics, viewsets
+from rest_framework.views import APIView
+
 from .forms import AddBasketFrom, RegisterUserForm, LoginUserForm
 from .models import *
 from .serializers import ProductSerializer
@@ -23,11 +24,9 @@ class Index(TemplateView):
 
 
 class Shop(ListView):
-    model = Product    # определение выводимых записей таблицы бд
-    # определение, какая будет открываться html страница (по умолчанию, если не указывать, catalog/Product_list.html)
+    model = Product
     template_name = 'catalog/shop.html'
-    # указание нзвания переменной для передачи записей из бд и использования в html (если не указывать, то object_list)
-    context_object_name = 'items'
+    context_object_name = 'items'   # переменная в html (иначе object_list)
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -46,7 +45,7 @@ def basket(request):
     return render(request, 'catalog/basket.html', context=context)
 
 
-class show_product(View):
+class Show_product(View):
     form = AddBasketFrom
     initial = {'amount': 'value'}
     template_name = 'catalog/product.html'
@@ -74,27 +73,6 @@ class show_product(View):
                                   amount=form.cleaned_data['amount'])  # запос на добавление корзины
             return redirect('shop')  # редирект на страницу с списком товара
         return render(request, self.template_name, context=context)
-#
-# def show_product(request, product_id):
-#     product = get_object_or_404(Product, id=product_id)
-#     if request.method == "POST":    # проверка, был ли отправлен запрос
-#         form = AddBasketFrom(request.POST)
-#         if form.is_valid():    # проверка на правильность введенных данных
-#             try:
-#                 Basket.objects.create(product_id=product.pk,
-#                                       user_id=request.user.pk,
-#                                       amount=form.cleaned_data['amount'])    # запос на добавление корзины
-#                 return redirect('shop')    # редирект на страницу с списком товара
-#             except:
-#                 form.add_error(None, "Ошибка добавления продукта")
-#     else:    # если запрос не отправлен, то формируется форма
-#         form = AddBasketFrom()
-#     context = {
-#         'title': product.name,
-#         'product': product,
-#         'form': form,
-#     }
-#     return render(request, 'catalog/product.html', context=context)
 
 
 def pageNotFound(request, exception):
@@ -134,7 +112,7 @@ def logout_user(request):
     logout(request)
     return redirect('home')
 
-
+# 25 минута
 class ProductAPIView (generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
