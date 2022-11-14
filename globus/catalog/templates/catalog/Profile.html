@@ -1,0 +1,14 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+<div class="content">
+    {% for i in items %}
+    <table>
+        <tr>
+            <th>{{i.pk}}</th>
+            <th>{{i.total_cost}}</th>
+            <th>{{i.status}}</th>
+        </tr>
+    </table>
+</div>
+{% endblock %}
