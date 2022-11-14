@@ -1,0 +1,19 @@
+<p>show-prd works!</p>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>category</th>
+            <th>brand</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dataItem of ProductList">
+        <td>{{dataItem.name}}</td> 
+        <td>{{dataItem.brand}}</td>
+        <td>{{dataItem.category}}</td>
+    </tr>
+    </tbody>
+</table>
