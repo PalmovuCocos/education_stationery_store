@@ -1,19 +1,13 @@
-<p>show-prd works!</p>
-
-
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>category</th>
-            <th>brand</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let dataItem of ProductList">
-        <td>{{dataItem.name}}</td> 
-        <td>{{dataItem.brand}}</td>
-        <td>{{dataItem.category}}</td>
-    </tr>
-    </tbody>
-</table>
+<div class="products">
+<div class="product-wrapper" *ngFor="let dataItem of ProductList">
+    <a href="#" class="product">
+    <h3>{{dataItem.name}}</h3>
+    <p>{{dataItem.category}}</p>
+    <p>Бренд: {{dataItem.brand}}</p>
+    <div class="product-photo">
+        <img src="{{dataItem.photo}}">
+    </div>
+    <p>Цена: {{dataItem.price}}</p>
+    </a>
+</div>
+</div>
