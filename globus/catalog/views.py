@@ -74,7 +74,6 @@ class OrderList(View):
 
 class Show_product(View):
     form = AddBasketFrom
-    initial = {'amount': 'value'}
     template_name = 'catalog/product.html'
 
     def get(self, request, product_id):
