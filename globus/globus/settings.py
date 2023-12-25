@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from decouple import config, Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -14,7 +15,9 @@ SECRET_KEY = 'django-insecure-k%z0ib%()k^pbr-+r%if8=txq!kfy8dvj=b@8a2lrd=m=*^^r8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = config("DJANGO_ALLOWED_HOSTS",
+                       default="localhost",
+                       cast=Csv())
 
 #
 CORS_ORIGIN_ALLOW_ALL = True
@@ -73,12 +76,13 @@ WSGI_APPLICATION = 'globus.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'stationery_store',
-        'USER': 'postgres',
-        'PASSWORD': '4221',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'ENGINE': config("SQL_ENGINE", default="django.db.backends.sqlite3"),
+        'NAME': config("SQL_DATABASE",
+                       default=os.path.join(BASE_DIR, "db.sqlite3")),
+        'USER': config("SQL_USER", default="user"),
+        'PASSWORD': config("SQL_PASSWORD", default="password"),
+        'HOST': config("SQL_HOST", default="localhost"),
+        'PORT': config("SQL_PORT", default="5432"),
     }
 }
 

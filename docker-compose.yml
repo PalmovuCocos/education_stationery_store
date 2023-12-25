@@ -1,0 +1,32 @@
+services:
+  django:
+    build: .
+    container_name: django_globus
+    command: bash -c "python manage.py migrate --noinput &&
+             python manage.py runserver 0.0.0.0:8000"
+
+    volumes:
+      - .:/usr/src/transferring_things/
+    ports:
+      - 8000:8000
+    environment:
+      - POSTGRES_DB=stationery_store
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=4221
+    depends_on:
+      - pgdb
+    env_file:
+      - .env
+
+  pgdb:
+    image: postgres
+    environment:
+      - POSTGRES_DB=stationery_store
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=4221
+    container_name: pgdb
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+volumes:
+  pg_data:
